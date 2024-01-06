@@ -10,7 +10,14 @@ The box was created on a Fedora 39 machine with libvirt, virt-manager, vagrant a
 
 I downloaded the [RouterOS 7.13 x86 iso](https://download.mikrotik.com/routeros/7.13/mikrotik-7.13.iso) from https://mikrotik.com/download and created a new vm with virt-manager with installation from the downloaded iso. I checked "Customize configuration before install" and changed disk bus to "SATA". RouterOS will not install on a VirtIO disk.
 
-After installation I run the commands in `setup.sh` script and shut down the vm with `system shutdown`.
+After installation I run the commands in `setup.sh` script: 
+```
+ip dhcp-client add interface=ether1 disabled=no
+tool fetch url="https://raw.githubusercontent.com/ktogias/mikrotik-vagrant-box/master/setup.sh" mode=https dst-path="setup.sh"
+system script add name=setup source=[/file get setup.sh contents];
+system script run setup
+```
+and shut down the vm with `system shutdown`.
 
 Then I used `create_box.sh` script to create the box.
 

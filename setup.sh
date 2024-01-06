@@ -3,7 +3,8 @@
 # This script was run after installing vm from RouterOS iso
 
 # Enable dhcp on ether1 interface. Needed to get ip from management network.
-ip dhcp-client add interface=ether1 disabled=no
+# Run the following commented out command to setup network and be able to download the script.
+#ip dhcp-client add interface=ether1 disabled=no
 
 # Enable ssh. Needed to be able to ssh to the vm.
 ip service enable ssh
